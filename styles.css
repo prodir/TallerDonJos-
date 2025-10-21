@@ -239,13 +239,7 @@ padding: 1.5rem 0;
   margin-top: 1.25rem;
 }
 
-/* Responsive */
-@media (max-width: 1100px){
-  .services-grid{ grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 680px){
-  .services-grid{ grid-template-columns: 1fr; }
-}
+
 
 .service-card{
   background: #fff;
@@ -335,15 +329,7 @@ padding: 1.5rem 0;
   color: var(--primary);
   font-weight: bold;
 }
-/* Responsive */
-@media (max-width: 950px){
-.nav-links { display:none; }
-.nav-buttons { display:none; }
-.menu-toggle { display:block; }
-}
-@media (min-width: 951px){
-.nav-drawer{ display:none !important; }
-}
+
 
 
 .logo-slider {
@@ -394,12 +380,6 @@ padding: 1.5rem 0;
 .faqs{
   /* ⬇️ Cambiá esta ruta a tu archivo real */
   --faq-bg: url('faqs.png');
-
-  background-image: var(--faq-bg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
   border-radius: 20px;
   padding: clamp(2.5rem, 4vw, 4rem) 1rem;
   color: #000000;
@@ -415,6 +395,48 @@ padding: 1.5rem 0;
   align-items: center;
   gap: 1.4rem;
 }
+
+/* Full-bleed por pseudo-elemento SIN 100vw ni transform (no genera overflow) */
+.faqs, .contact-cta, footer { position: relative; z-index: 0; }
+
+.faqs::before,
+.contact-cta::before,
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* Empuja el fondo hasta los bordes del viewport sin sumar 1px fantasma */
+  left:  calc(50% - 50vw);
+  right: calc(50% - 50vw);
+  z-index: -1;
+}
+
+/* Fondos */
+.faqs::before {
+  background-image: var(--faq-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.contact-cta::before {
+  background: radial-gradient(1200px 400px at 20% 20%, rgba(16,52,166,.08), transparent), #0f1322;
+}
+footer::before { background: #0f1322; }
+
+
+/* Padding lateral SOLO en el contenido interno, no en la sección full-bleed */
+.faqs { padding: clamp(2.5rem, 4vw, 4rem) 0; }  /* solo vertical */
+.faqs .faqs-inner,
+.contact-cta .container,
+footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;   /* el “aire” lateral va acá */
+}
+/* Anti-overflow del documento (no rompe sticky porque es solo eje X) */
+body { overflow-x: hidden; } /* fallback */
+
 
 /* título */
 .faqs-title{
@@ -511,32 +533,13 @@ padding: 1.5rem 0;
   border-radius: 10px;
 }
 
-/* === Full width sin scroll horizontal === */
-.section.faqs,
-.section.contact-cta,
-footer {
-  position: relative;
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  overflow-x: hidden; /* previene el scroll horizontal */
-  border-radius: 0;
+#trabajos,
+#trabajos .container,
+.stack {
+  overflow: visible !important;
 }
 
-/* contenedor interno centrado */
-.faqs .faqs-inner,
-.contact-cta .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
 
-/* asegura que el body nunca haga scroll lateral */
-html, body {
-  overflow-x: hidden;
-}
 
 
 /* ===== CONTACTO / CTA (estilo tipo Taller Moreto) ===== */
@@ -578,11 +581,6 @@ html, body {
 
 .contact-map { padding: 0; overflow: hidden; border-radius: 12px; }
 .contact-map iframe { width: 100%; height: 480px; border: 0; display: block; }
-
-@media (max-width: 980px) {
-  .contact-grid { grid-template-columns: 1fr; }
-  .contact-map iframe { height: 320px; }
-}
 
 
 /*TRABAJOS DESTACADOS*/
@@ -715,14 +713,91 @@ html, body {
 }
 
 /* Responsive */
+/* === MOBILE (≤768px) === */
 @media (max-width: 768px) {
+  /* Navbar */
+  .nav-links, .nav-buttons { display: none; }
+  .menu-toggle { display: block; }
+  .nav-drawer { top: var(--header-h, 64px); }
+
+  /* Hero */
+  .hero { 
+    padding: 3rem 1rem;
+    background-attachment: scroll;
+  }
+  .hero .inner {
+    margin-left: 0;
+    align-items: flex-start;  /* 🔹 mantiene todo a la izquierda */
+    text-align: left;         /* 🔹 títulos y botones alineados a la izquierda */
+  }
+  .hero h1 {
+    font-size: 2.2rem;
+    text-align: left;         /* 🔹 refuerzo por si algún otro estilo lo centra */
+  }
+  .hero h2 {
+    font-size: 1.6rem;
+    text-align: left;         /* 🔹 DON JOSÉ a la izquierda */
+  }
+  .hero-cta {
+    flex-direction: column;
+    align-items: flex-start;  /* 🔹 también los botones alineados a la izquierda */
+  }
+
+  /* Servicios */
+  .services-grid { grid-template-columns: 1fr; }
+
+  /* About */
+  .about-grid { grid-template-columns: 1fr; text-align: center; }
+  .about-img img { max-width: 85%; margin: 0 auto; }
+
+  /* Contacto */
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-map iframe { height: 320px; }
+
+  /* WhatsApp flotante */
   .whatsapp-float img { width: 50px; height: 50px; }
-  .whatsapp-msg { font-size: .8rem; }
+  .whatsapp-msg { font-size: 0.85rem; }
 }
 
 
+/* === DESKTOP MEDIO (769px–1440px) === */
+@media (min-width: 769px) and (max-width: 1440px) {
+  /* Navbar */
+  .menu-toggle { display: none; }
+  .nav-links { gap: 1.2rem; }
+  .brand img { height: 90px; }
 
+  /* Hero */
+  .hero h1 { font-size: 3.8rem; }
+  .hero h2 { font-size: 2.4rem; }
+  .hero .inner { margin-left: 5%; }
 
+  /* Servicios */
+  .services-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
 
+  /* About */
+  .about-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
 
+  /* Contacto */
+  .contact-grid { grid-template-columns: 1.1fr 1fr; }
+}
 
+/* === PANTALLAS GRANDES (≥1441px) === */
+@media (min-width: 1441px) {
+  .container, .faqs-inner, .contact-cta .container {
+    max-width: 1600px;
+  }
+
+  .hero h1 { font-size: 5rem; }
+  .hero h2 { font-size: 3rem; }
+  .hero .inner { margin-left: 10%; }
+
+  .services-grid { grid-template-columns: repeat(5, 1fr); gap: 24px; }
+  .service-card { padding: 2rem; }
+
+  .about-grid { gap: 4rem; }
+  .contact-grid { gap: 3rem; }
+
+  .whatsapp-float img { width: 72px; height: 72px; }
+  .whatsapp-msg { font-size: 1rem; }
+}
