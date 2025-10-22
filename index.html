@@ -69,7 +69,7 @@
 
 <!-- SERVICIOS -->
 <div id="servicios" class="container">
-  <h2 class="center">Servicios principales</h2>
+  <h2 class="center">SERVICIOS PRINCIPALES</h2>
   <p class="lead center">Soluciones integrales para chapa, pintura y estética automotor.</p>
 
   <div class="services-grid">
@@ -138,7 +138,7 @@
 <!--TRABAJOS DESTACADOS-->
 <section class="section" id="trabajos">
   <div class="container">
-    <h2 class="center">Trabajos destacados</h2>
+    <h2 class="center">TRABAJOS DESTACADOS</h2>
   </div>
 
   <div class="stack">
@@ -187,7 +187,7 @@
       <img src="fondo2.jpg" alt="Equipo del Taller Don José" />
     </div>
     <div class="about-text">
-      <h2>Quiénes somos</h2>
+      <h2>QUIENÉS SOMOS</h2>
       <p>Somos Taller Don José, tu aliado experto en chapa y pintura ubicado en Beguiristaín 505, Crucecita - Avellaneda. Nuestra misión es simple pero firme: brindar un servicio integral y de excelencia en el automotor. Sabemos que dejar tu vehículo es un acto de confianza, por eso nuestra filosofía se basa en dos pilares fundamentales: la transparencia absoluta en la comunicación y una calidad de terminación que supera las expectativas.</p>
       <p>Nuestra Diferencia: El Compromiso con el Cliente:
 En un sector donde a menudo la incertidumbre sobre el costo y el resultado generan dudas, en Don José abordamos estas preocupaciones con honestidad y humanidad. No solo reparamos golpes, sino que nos responsabilizamos de cada vehículo como si fuera nuestro.</p>
@@ -204,7 +204,7 @@ En un sector donde a menudo la incertidumbre sobre el costo y el resultado gener
 <!--SECCION CARRUSEL SEGUROS-->
 <section class="section insurers" id="aseguradoras" aria-label="Aseguradoras con las que trabajamos">
   <div class="container">
-    <h2 class="center">Trabajamos con todas las aseguradoras</h2>
+    <h2 class="center">TRABAJAMOS CON TODAS LAS ASEGURADORAS</h2>
 
     <div class="logo-slider" aria-hidden="true">
       <div class="logo-track">
@@ -230,7 +230,7 @@ En un sector donde a menudo la incertidumbre sobre el costo y el resultado gener
 <section class="faqs" id="faqs">
   <div class="faqs-inner">
     <div class="faqs-title">
-      <h2>Preguntas Frecuentes</h2>
+      <h2>PREGUNTAS FRECUENTES</h2>
       <p>Resolvé dudas rápidas sobre alcances, tiempos, pagos y cómo empezar.</p>
     </div>
 
@@ -345,14 +345,14 @@ En un sector donde a menudo la incertidumbre sobre el costo y el resultado gener
 
 <footer>
 <div class="container">
-<small>© <span id="y"></span> Taller Don José. Todos los derechos reservados.</small>
+<p>© 2025 Taller Don José. Todos los derechos reservados. Diseñado y desarrollado por <a href="https://codenova.com.ar" target="_blank" rel="noopener">CodeNova</a>.</p>
 </div>
 </footer>
 
 <!-- BOTÓN FLOTANTE DE WHATSAPP -->
 <a href="https://wa.me/5491128811035?text=Hola%20Taller%20Don%20Jos%C3%A9%2C%20quiero%20hacer%20una%20consulta"
    class="whatsapp-float" target="_blank" rel="noopener">
-  <img src="logowp.png" alt="WhatsApp Taller Don José" />
+  <img src="wpicono.png" alt="WhatsApp Taller Don José" />
   <span class="whatsapp-msg">¡Mandanos un Whatsapp!</span>
 </a>
 
@@ -454,8 +454,80 @@ window.addEventListener('resize', setH);
 setH();
 })();
 
-
 </script>
+
+<!--Scrip arrastre manual (drag & swipe) seguros-->
+<script>
+(function(){
+  const slider = document.querySelector('.logo-slider');
+  const track  = slider?.querySelector('.logo-track');
+  if (!slider || !track) return;
+
+  // 1) Duplicamos contenido para loop infinito
+  track.innerHTML = track.innerHTML + track.innerHTML;
+
+  // 2) Estado
+  let pos = 0;                 // desplazamiento actual en px (negativo mueve a la izquierda)
+  let speed = 0.35;            // velocidad px/frame (ajustable)
+  let dragging = false;
+  let startX = 0;
+  let startPos = 0;
+  let rafId = null;
+
+  // 3) Medidas (mitad de la tira, porque la duplicamos)
+  const halfWidth = () => track.scrollWidth / 2;
+
+  // 4) Animación con rAF
+  function animate(){
+    if (!dragging) {
+      pos -= speed;
+      // wrap para loop infinito
+      if (pos <= -halfWidth()) pos += halfWidth();
+    }
+    track.style.transform = `translateX(${pos}px)`;
+    rafId = requestAnimationFrame(animate);
+  }
+  rafId = requestAnimationFrame(animate);
+
+  // 5) Utils pointer
+  function onDown(clientX){
+    dragging = true;
+    startX = clientX;
+    startPos = pos;
+  }
+  function onMove(clientX){
+    if (!dragging) return;
+    const delta = clientX - startX;
+    pos = startPos + delta;
+    // normalizamos para que nunca se escape demasiado
+    const hw = halfWidth();
+    if (pos > 0) pos = ((pos % hw) - hw); // mantiene el rango [-hw, 0)
+    if (pos <= -hw) pos += hw;
+  }
+  function onUp(){
+    dragging = false;
+  }
+
+  // 6) Mouse
+  slider.addEventListener('mousedown', (e)=> onDown(e.clientX));
+  window.addEventListener('mousemove', (e)=> onMove(e.clientX));
+  window.addEventListener('mouseup', onUp);
+
+  // 7) Touch
+  slider.addEventListener('touchstart', (e)=> onDown(e.touches[0].clientX), {passive:true});
+  slider.addEventListener('touchmove',  (e)=> onMove(e.touches[0].clientX), {passive:true});
+  slider.addEventListener('touchend', onUp);
+
+  // 8) Pausar al entrar con mouse (opcional y suave)
+  slider.addEventListener('mouseenter', ()=> speed = 0.18);
+  slider.addEventListener('mouseleave', ()=> speed = 0.35);
+
+  // 9) Limpieza por si hiciera falta
+  window.addEventListener('beforeunload', ()=> cancelAnimationFrame(rafId));
+})();
+</script>
+
+
 
 <!--Script flotante wp-->
 

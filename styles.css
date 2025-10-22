@@ -11,6 +11,7 @@ font-family: sans-serif;
 color: var(--text);
 background: var(--surface);
 }
+
 .container {
 max-width: 1500px;
 margin: 0 auto;
@@ -242,6 +243,10 @@ padding: 1.5rem 0;
   background: rgba(31,70,196,.10); /* pill suave */
   margin-bottom: .35rem;
 }
+
+.container h2{
+  color: var(--primary);
+}
 .service-card h3{
   font-size: 1.05rem;
   margin: 0;
@@ -367,6 +372,7 @@ padding: 1.5rem 0;
   font-weight: bold;
 }
 
+/*SECCION CARRUSEL ASEGURADORAS*/
 
 .logo-slider {
   position: relative;
@@ -384,12 +390,7 @@ padding: 1.5rem 0;
   align-items: center;
   gap: 2.5rem;
   padding: 1.25rem 2rem;
-  animation: scroll-logos 25s linear infinite;
-  width: max-content;
-}
-
-.logo-slider:hover .logo-track {
-  animation-play-state: paused;
+  will-change: transform;
 }
 
 .logo-track img {
@@ -403,10 +404,7 @@ padding: 1.5rem 0;
   transform: translateY(-2px);
 }
 
-@keyframes scroll-logos {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+
 
 /* =============================================== */
 /* FAQS con look & feel de la sección 2 (links)   */
@@ -479,7 +477,7 @@ body { overflow-x: hidden; } /* fallback */
 .faqs-title h2{
   margin:0 0 .35rem;
   font-size: clamp(1.6rem, 2.6vw, 2.2rem);
-  color: var(--accent);
+  color: var(--primary);
   font-family: "Aldrich", sans-serif;
 
 }
@@ -617,6 +615,18 @@ body { overflow-x: hidden; } /* fallback */
 .contact-map { padding: 0; overflow: hidden; border-radius: 12px; }
 .contact-map iframe { width: 100%; height: 480px; border: 0; display: block; }
 
+footer a {
+  color: var(--surface);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color .3s ease;
+}
+
+footer a:hover {
+  color: #ff6a00; /* o el naranja de tu paleta */
+}
+
+
 
 /* ===== BOTÓN FLOTANTE WHATSAPP ===== */
 .whatsapp-float {
@@ -708,7 +718,7 @@ body { overflow-x: hidden; } /* fallback */
   .services-grid { grid-template-columns: 1fr; }
 
   /* About */
-  .about-grid { grid-template-columns: 1fr; text-align: center; }
+  .about-grid { grid-template-columns: 1fr; text-align: left; }
   .about-img img { max-width: 85%; margin: 0 auto; }
 
   /* Contacto */
