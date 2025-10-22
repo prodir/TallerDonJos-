@@ -30,9 +30,9 @@ align-items: center;
 padding: 0.8rem 0;
 }
 .brand {
-      display: flex;
-  align-items: center; /* centra verticalmente */
-  gap: 0.6rem;         /* espacio entre logo y texto */
+  display: flex;
+  align-items: center; 
+  gap: 0.6rem; 
   text-decoration: none;
 }
 .brand img {
@@ -59,8 +59,7 @@ color: var(--primary);
 
 /* ===== NAV LINKS ===== */
 .nav-links { display: flex; gap: 1.4rem; align-items: center; }
-.nav-links a { color: var(--text); text-decoration: none; font-weight: 600; position: relative; transition: color .2s ease;   text-shadow: 0 0 2px rgba(0, 0, 0, 0.6); /* 🔹 sombra suave para resaltar sobre fondos */
- }
+.nav-links a { color: var(--text); text-decoration: none; font-weight: 500; position: relative; transition: color .2s ease; text-shadow: 0 0 1px rgba(0, 0, 0, 0.6);}
 .nav-links a::after { content: ""; position: absolute; bottom: -3px; left: 0; width: 0%; height: 2px; background: var(--primary); transition: width .3s ease; }
 .nav-links a:hover { color: var(--primary); }
 .nav-links a:hover::after { width: 100%; }
@@ -69,7 +68,7 @@ color: var(--primary);
 /* ===== Botón Hamburguesa (mobile) ===== */
 .menu-toggle { display:none; background:transparent; border:0; padding:.35rem; cursor:pointer; border-radius:8px; }
 .menu-toggle:focus-visible{ outline:2px solid var(--primary); outline-offset:2px; }
-.menu-toggle .bar{ display:block; width:26px; height:2px; background:#111; margin:6px 0; transition:transform .25s ease, opacity .25s ease; }
+.menu-toggle .bar{ display:block; width:26px; height:2px; background:#111; margin:6px 1rem; transition:transform .25s ease, opacity .25s ease; }
 
 
 /* Estado abierto (animación X) */
@@ -97,9 +96,9 @@ color: var(--primary);
   justify-content: center;
   align-items: flex-start;
   color: #fff;
-  text-align: left;          /* ← Texto alineado a la izquierda */
+  text-align: left;  
   padding: 4rem 1rem;
-  background: url("208.avif") center center/cover no-repeat fixed;
+  background: url("208invertida.jpg") center center/cover no-repeat fixed;
   margin-bottom: clamp(32px, 5vw, 172px);
 }
 
@@ -108,41 +107,36 @@ color: var(--primary);
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.25); /* oscurece un poco la imagen */
+  background: rgba(0, 0, 0, 0.25); 
 }
 .hero .inner {
   position: relative;
   z-index: 2;
-  display: flex;                 /* 🔹 para poder alinear internamente */
-  flex-direction: column;        /* mantiene el orden vertical */
-  align-items: flex-start;       /* 🔹 alinea todo a la izquierda */
+  display: flex;                 
+  flex-direction: column;       
+  align-items: flex-start;  
   text-align: left;
-  max-width: 950px;              /* limita el ancho del bloque */
-  margin-left: 6%;               /* 🔹 separa del borde izquierdo */
-  gap: 1rem;                     /* da aire entre título, texto y botones */
+  max-width: 1000px;  
+  margin-left: 6%; 
+  gap: 1rem; 
 }
-
-
 .hero h1 {
-  font-size: 3rem;
-  margin-bottom: 0.3rem; /* 🔹 reduce el espacio debajo del título principal */
-}
-
-.hero h1 {
-  font-size: 4.2rem;          /* 🔹 bien grande */
+  font-size: 4rem;
   font-weight: 900;
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 1px;
   text-shadow:
     0 4px 10px rgba(0, 0, 0, 0.6),
-    0 0 20px rgba(0, 0, 0, 0.4); /* 🔹 profundidad y contraste */
+    0 0 20px rgba(0, 0, 0, 0.4); 
   margin: 0;
   line-height: 1.1;
+    opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.9s ease-out forwards;
 }
-
 .hero h2 {
-  font-size: 3rem;            /* 🔹 más chico pero bien visible */
+  font-size: 3.5rem;
   font-weight: 800;
   color: #fff;
   margin-top: 0.3rem;
@@ -151,17 +145,11 @@ color: var(--primary);
     0 4px 10px rgba(0, 0, 0, 0.7),
     0 0 20px rgba(0, 0, 0, 0.5);
   line-height: 1.1;
-}
-
-/* Opcional: un toque de animación de aparición */
-.hero h1,
-.hero h2 {
+  animation-delay: 0.2s;
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 0.9s ease-out forwards;
 }
-.hero h2 { animation-delay: 0.2s; }
-
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -174,7 +162,6 @@ color: var(--primary);
   flex-wrap: wrap;
   margin-top: 1.5rem; /* 🔹 separa los botones del texto */
 }
-
 .hero-cta .btn {
   font-size: 1.2rem;
   font-weight: 600;
@@ -183,10 +170,8 @@ color: var(--primary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
-  
   text-decoration: none;
 }
-
 /* Principal */
 .btn-primary {
   background: transparent;
@@ -194,14 +179,12 @@ color: var(--primary);
   border: 4px solid #ffffff;
   box-shadow: 0 0 0 rgba(255, 255, 255, 0);
 }
-
 .btn-primary:hover {
   background: #fff;
   color: #000;
   box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
   transform: translateY(-3px);
 }
-
 
 .section {
 padding: 6rem 1rem;
@@ -239,8 +222,6 @@ padding: 1.5rem 0;
   margin-top: 1.25rem;
 }
 
-
-
 .service-card{
   background: #fff;
   border-radius: 14px;
@@ -261,7 +242,6 @@ padding: 1.5rem 0;
   background: rgba(31,70,196,.10); /* pill suave */
   margin-bottom: .35rem;
 }
-
 .service-card h3{
   font-size: 1.05rem;
   margin: 0;
@@ -273,14 +253,71 @@ padding: 1.5rem 0;
   font-size: .92rem;
   line-height: 1.35;
 }
-
-/* Hover: levanta, resalta borde y sombra */
 .service-card:hover{
   transform: translateY(-6px);
   border-color: rgba(31,70,196,.35);
   box-shadow: 0 18px 34px rgba(0,0,0,.12);
 }
 
+
+/*TRABAJOS DESTACADOS*/
+
+.stack {
+  --gap: 24px;          /* separación entre tarjetas apiladas */
+  --top: 120px;       /* distancia al top cuando “pegan” */
+  --card-h: 44vh;       /* alto de cada tarjeta */
+  position: relative;
+  display: grid;
+  gap: var(--gap);
+  margin-top: 2rem;
+  padding-bottom: 5vh; /* aire al final para el último sticky */
+    max-width: 1200px; 
+  margin: 2rem auto;  /* centra */
+  padding: 0 1rem;    /* respiración lateral */
+}
+
+.stack-card {
+  position: sticky;
+  top: var(--top);
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 18px 40px rgba(0,0,0,.15);
+  height: var(--card-h);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  transform-origin: center top;
+  will-change: transform, box-shadow;
+}
+
+.stack-card img {
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+  display: block;
+}
+
+.stack-card .stack-info {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  margin-top: 0;                    /* quitamos el “truco” del negativo */
+  padding: 1rem 1.25rem;
+  background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.70) 60%);
+  color: #fff;
+  z-index: 2;
+}
+
+.stack-card h3,
+.stack-card p { margin: 0; }         /* compacta el texto */
+
+.stack-card + .stack-card { margin-top: calc(var(--gap) * -1); }
+
+/* efecto sutil de escala/traslado según su orden */
+.stack-card { counter-increment: card; }
+.stack-card:nth-child(1) { z-index: 1; }
+.stack-card:nth-child(2) { z-index: 2; }
+.stack-card:nth-child(3) { z-index: 3; }
+.stack-card:nth-child(4) { z-index: 4; }
 
 
 /* ===== Sección Quiénes Somos ===== */
@@ -331,7 +368,6 @@ padding: 1.5rem 0;
 }
 
 
-
 .logo-slider {
   position: relative;
   overflow: hidden;
@@ -376,17 +412,13 @@ padding: 1.5rem 0;
 /* FAQS con look & feel de la sección 2 (links)   */
 /* =============================================== */
 
-/* — Fondo: SOLO imagen, sin gradientes extra — */
 .faqs{
-  /* ⬇️ Cambiá esta ruta a tu archivo real */
   --faq-bg: url('faqs.png');
   border-radius: 20px;
   padding: clamp(2.5rem, 4vw, 4rem) 1rem;
   color: #000000;
   font-family: sans-serif;
 }
-
-/* contenedor central */
 .faqs-inner{
   max-width: 1200px;
   margin: 0 auto;
@@ -442,7 +474,6 @@ body { overflow-x: hidden; } /* fallback */
 .faqs-title{
   text-align:left;
   max-width: 800px;
-  
   font-family: sans-serif;
 }
 .faqs-title h2{
@@ -516,15 +547,21 @@ body { overflow-x: hidden; } /* fallback */
 .faq[open] .flecha{ transform: rotate(90deg); }
 
 /* respuesta */
-.faq .faq-a{
-    padding: 0 16px 14px 18px;
-  margin-top: .35rem;
-  color: #000000;
-  line-height: 1.55;
-  border-left: 2px solid var(--primary);
-
+.faq .faq-a {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0 16px;
+  margin-top: 0;
 }
 .faq-a ul{ margin: .25rem 0 0 1rem; }
+
+.faq[open] .faq-a {
+  max-height: 500px;   /* suficiente para textos largos */
+  opacity: 1;
+  margin-top: .35rem;
+  padding-bottom: 14px;
+}
 
 /* accesibilidad: foco lindo como en sección 2 */
 .faq-q:focus-visible{
@@ -540,19 +577,17 @@ body { overflow-x: hidden; } /* fallback */
 }
 
 
-
-
 /* ===== CONTACTO / CTA (estilo tipo Taller Moreto) ===== */
 .contact-cta {
   background: radial-gradient(1200px 400px at 20% 20%, rgba(16,52,166,.08), transparent), #0f1322;
   color: #f6f7ff;
 }
-.contact-cta .container { padding-top: 3rem; padding-bottom: 3rem; }
+.contact-cta .container { padding-top: 2rem; padding-bottom: 2rem; }
 
 .contact-grid {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
-  gap: 2rem;
+  gap: 1rem;
   align-items: start;
 }
 
@@ -563,15 +598,15 @@ body { overflow-x: hidden; } /* fallback */
 }
 .contact-data { list-style: none; padding: 0; margin: 0 0 1.25rem; }
 .contact-data li { margin: .35rem 0; }
-.contact-data a { color: #cfd6ff; text-decoration: underline; }
+.contact-data a { color: #cfd6ff; text-decoration: none; }
 
 .btn-cta {
   display: inline-block;
-  background: var(--primary); color: #1a1f35; font-weight: 800; letter-spacing: .3px;
+  background: var(--primary); color: #ffffff; font-weight: 600; letter-spacing: .3px;
   padding: .9rem 1.4rem; border-radius: 10px; text-decoration: none;
   box-shadow: 0 8px 18px rgba(0,0,0,.25);
 }
-.btn-cta.outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+.btn-cta.outline { background: transparent; color: var(--surface); border: 2px solid var(--primary); }
 .cta-row { display: flex; gap: 1rem; margin: 1rem 0 1.25rem; flex-wrap: wrap; }
 
 .follow { margin: .25rem 0 .5rem; font-weight: 700; }
@@ -581,80 +616,6 @@ body { overflow-x: hidden; } /* fallback */
 
 .contact-map { padding: 0; overflow: hidden; border-radius: 12px; }
 .contact-map iframe { width: 100%; height: 480px; border: 0; display: block; }
-
-
-/*TRABAJOS DESTACADOS*/
-
-/* ===== Scroll Stack ===== */
-.stack {
-  --gap: 24px;          /* separación entre tarjetas apiladas */
-  --top: 120px;       /* distancia al top cuando “pegan” */
-  --card-h: 44vh;       /* alto de cada tarjeta */
-  position: relative;
-  display: grid;
-  gap: var(--gap);
-  margin-top: 2rem;
-  padding-bottom: 5vh; /* aire al final para el último sticky */
-    max-width: 1200px; 
-  margin: 2rem auto;  /* centra */
-  padding: 0 1rem;    /* respiración lateral */
-}
-
-.stack-card {
-  position: sticky;
-  top: var(--top);
-  border-radius: 16px;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 18px 40px rgba(0,0,0,.15);
-  height: var(--card-h);
-  display: grid;
-  grid-template-rows: 1fr auto;
-  transform-origin: center top;
-  will-change: transform, box-shadow;
-}
-
-.stack-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.stack-card .stack-info {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  margin-top: 0;                    /* quitamos el “truco” del negativo */
-  padding: 1rem 1.25rem;
-  background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.70) 60%);
-  color: #fff;
-  z-index: 2;
-}
-
-.stack-card h3,
-.stack-card p { margin: 0; }         /* compacta el texto */
-
-
-
-
-
-.stack-card + .stack-card { margin-top: calc(var(--gap) * -1); }
-
-/* efecto sutil de escala/traslado según su orden */
-.stack-card { counter-increment: card; }
-.stack-card:nth-child(1) { z-index: 1; }
-.stack-card:nth-child(2) { z-index: 2; }
-.stack-card:nth-child(3) { z-index: 3; }
-.stack-card:nth-child(4) { z-index: 4; }
-
-
-
-
-/* Responsive */
-@media (max-width: 780px){
-  .stack { --top: 72px; --card-h: 48vh; --gap: 18px; }
-  .stack-card .stack-info { margin-top: -2.75rem; }
-}
 
 
 /* ===== BOTÓN FLOTANTE WHATSAPP ===== */
@@ -735,7 +696,7 @@ body { overflow-x: hidden; } /* fallback */
     text-align: left;         /* 🔹 refuerzo por si algún otro estilo lo centra */
   }
   .hero h2 {
-    font-size: 1.6rem;
+    font-size: 2.2rem;
     text-align: left;         /* 🔹 DON JOSÉ a la izquierda */
   }
   .hero-cta {
@@ -775,6 +736,10 @@ body { overflow-x: hidden; } /* fallback */
   /* Servicios */
   .services-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
 
+  /* Trabajos destacados */
+  .stack { --top: 72px; --card-h: 48vh; --gap: 18px; }
+  .stack-card .stack-info { margin-top: -2.75rem; }
+
   /* About */
   .about-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
 
@@ -782,22 +747,5 @@ body { overflow-x: hidden; } /* fallback */
   .contact-grid { grid-template-columns: 1.1fr 1fr; }
 }
 
-/* === PANTALLAS GRANDES (≥1441px) === */
-@media (min-width: 1441px) {
-  .container, .faqs-inner, .contact-cta .container {
-    max-width: 1600px;
-  }
 
-  .hero h1 { font-size: 5rem; }
-  .hero h2 { font-size: 3rem; }
-  .hero .inner { margin-left: 10%; }
 
-  .services-grid { grid-template-columns: repeat(5, 1fr); gap: 24px; }
-  .service-card { padding: 2rem; }
-
-  .about-grid { gap: 4rem; }
-  .contact-grid { gap: 3rem; }
-
-  .whatsapp-float img { width: 72px; height: 72px; }
-  .whatsapp-msg { font-size: 1rem; }
-}

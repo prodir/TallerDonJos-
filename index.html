@@ -51,7 +51,6 @@
 <a href="#quienes-somos">Quiénes somos</a>
 <a href="#faqs">FAQ's</a>
 <a href="#contacto">Contacto</a>
-<a class="btn btn-primary wapp" href="https://wa.me/5491128811035?text=Hola%20Taller%20Don%20Jos%C3%A9%2C%20quisiera%20pedir%20un%20presupuesto">WhatsApp</a>
 </nav>
 </header>
 
@@ -69,7 +68,7 @@
 
 
 <!-- SERVICIOS -->
-<div class="container">
+<div id="servicios" class="container">
   <h2 class="center">Servicios principales</h2>
   <p class="lead center">Soluciones integrales para chapa, pintura y estética automotor.</p>
 
@@ -137,7 +136,6 @@
 
 
 <!--TRABAJOS DESTACADOS-->
-
 <section class="section" id="trabajos">
   <div class="container">
     <h2 class="center">Trabajos destacados</h2>
@@ -146,7 +144,7 @@
   <div class="stack">
     <!-- Card 1 -->
     <article class="stack-card">
-      <img src="chapaypintura.jpg" alt="Reparación y pintura de guardabarros">
+      <img src="trabajosdonjose2.jpg" alt="Reparación y pintura de guardabarros">
       <div class="stack-info">
         <h3>Pintura por paños</h3>
         <p>Igualación de color y acabado espejo.</p>
@@ -182,6 +180,7 @@
   </div>
 </section>
 
+<!--SECCION QUIENES SOMOS-->
 <section class="section about" id="quienes-somos">
   <div class="container grid about-grid">
     <div class="about-img">
@@ -201,6 +200,8 @@ En un sector donde a menudo la incertidumbre sobre el costo y el resultado gener
   </div>
 </section>
 
+
+<!--SECCION CARRUSEL SEGUROS-->
 <section class="section insurers" id="aseguradoras" aria-label="Aseguradoras con las que trabajamos">
   <div class="container">
     <h2 class="center">Trabajamos con todas las aseguradoras</h2>
@@ -222,11 +223,6 @@ En un sector donde a menudo la incertidumbre sobre el costo y el resultado gener
     </div>
   </div>
 </section>
-
-
-
-
-
 
 <!-- ====================== -->
 <!-- SECCIÓN FAQS (nueva)   -->
@@ -307,11 +303,7 @@ En un sector donde a menudo la incertidumbre sobre el costo y el resultado gener
   </div>
 </section>
 
-
-
-
-
-<!-- CONTACTO / CTA (sin formulario) -->
+<!-- CONTACTO / CTA -->
 <section id="contacto" class="section contact-cta">
   <div class="container contact-grid">
     <!-- Columna izquierda: logo, datos, CTAs y redes -->
@@ -365,8 +357,6 @@ En un sector donde a menudo la incertidumbre sobre el costo y el resultado gener
 </a>
 
 
-
-
 <script>
 document.getElementById('y').textContent = new Date().getFullYear();
 </script>
@@ -405,7 +395,6 @@ window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
 </script>
 
 <!--Script para loop infinito-->
-
 <script>
 document.getElementById('y').textContent = new Date().getFullYear();
 
@@ -468,22 +457,6 @@ setH();
 
 </script>
 
-
-<!--Script faqs-->
-<script>
-  (function(){
-    const faqs = document.querySelector('.faqs');
-    if (!faqs) return;
-    const update = () => {
-      const anyOpen = faqs.querySelector('details[open]');
-      faqs.classList.toggle('faq-open', !!anyOpen);
-    };
-    faqs.addEventListener('toggle', update, true);
-    update();
-  })();
-</script>
-
-
 <!--Script flotante wp-->
 
 <script>
@@ -531,9 +504,6 @@ window.addEventListener("load", () => {
   });
 });
 </script>
-
-
-
 
 </body>
 </html>
