@@ -66,7 +66,6 @@
 </div>
 </section>
 
-
 <!-- SERVICIOS -->
 <div id="servicios" class="container">
   <h2 class="center">SERVICIOS PRINCIPALES</h2>
@@ -76,10 +75,7 @@
     <!-- 1) Chapa y pintura -->
     <article class="service-card">
       <div class="icon">
-        <!-- spray / pintura -->
-        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
-          <path d="M7 7h7v3H7zM4 10h13v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-9zM17 4h3M17 6h3M17 8h3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
+        <img src="5.png" alt="Icono de Chapa y Pintura">
       </div>
       <h3>Chapa y pintura</h3>
       <p>Reparaciones completas, igualación de color y terminación profesional.</p>
@@ -88,10 +84,7 @@
     <!-- 2) Detailing -->
     <article class="service-card">
       <div class="icon">
-        <!-- brillo -->
-        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
-          <path d="M12 3l2 4 4 2-4 2-2 4-2-4-4-2 4-2 2-4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-        </svg>
+        <img src="6.png" alt="Icono de Detailing">
       </div>
       <h3>Detailing</h3>
       <p>Pulido, lustrado, restauración de faros y protección cerámica.</p>
@@ -100,10 +93,7 @@
     <!-- 3) Sacabollos -->
     <article class="service-card">
       <div class="icon">
-        <!-- ventosa / PDR -->
-        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
-          <path d="M4 14h16M8 10h8M6 18h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
+        <img src="7.png" alt="Icono de Sacabollos">
       </div>
       <h3>Sacabollos</h3>
       <p>Eliminamos golpes leves sin repintar, preservando el color original.</p>
@@ -112,10 +102,7 @@
     <!-- 4) Restauración -->
     <article class="service-card">
       <div class="icon">
-        <!-- auto clásico -->
-        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
-          <path d="M3 14l2-5h14l2 5v3a1 1 0 0 1-1 1h-1a2 2 0 0 1-4 0H9a2 2 0 0 1-4 0H4a1 1 0 0 1-1-1v-3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-        </svg>
+        <img src="8.png" alt="Icono de Restauración">
       </div>
       <h3>Restauración</h3>
       <p>Recuperamos autos antiguos o dañados, devolviendo su brillo original.</p>
@@ -124,15 +111,14 @@
     <!-- 5) Retoques y trabajos menores -->
     <article class="service-card">
       <div class="icon">
-        <!-- pincel -->
-        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
-          <path d="M14 4l6 6-7 7H7v-6l7-7zM7 17s-1 3-4 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
+        <img src="9.png" alt="Icono de Retoques y trabajos menores">
       </div>
       <h3>Retoques y trabajos menores</h3>
       <p>Rayones, paragolpes, detalles de pintura y reparaciones rápidas.</p>
     </article>
   </div>
+</div>
+
 
 
 <!--TRABAJOS DESTACADOS-->
@@ -356,105 +342,75 @@ En un sector donde a menudo la incertidumbre sobre el costo y el resultado gener
   <span class="whatsapp-msg">¡Mandanos un Whatsapp!</span>
 </a>
 
+<!--Script para navbar hamburguesa-->
 
 <script>
-document.getElementById('y').textContent = new Date().getFullYear();
+(function () {
+  // Año en footer (una vez)
+  const yearEl = document.getElementById('y');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Scroll suave para anclas internas (una vez)
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      const href = anchor.getAttribute('href');
+      const target = href && document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ===== Menú mobile (hamburguesa) =====
+  const html   = document.documentElement;
+  const header = document.querySelector('header');
+  const btn    = document.querySelector('.menu-toggle');
+  const drawer = document.getElementById('nav-drawer');
+  if (!header || !btn || !drawer) return;
+
+  // Evitar doble binding si el script se incluye accidentalmente dos veces
+  if (btn.dataset.bound === '1') return;
+  btn.dataset.bound = '1';
+
+  // Altura del header para posicionar el drawer
+  const setHeaderH = () => {
+    const h = header.offsetHeight || 64;
+    html.style.setProperty('--header-h', h + 'px');
+  };
+  setHeaderH();
+  window.addEventListener('resize', setHeaderH);
+
+  const open = () => {
+    html.classList.add('nav-open');
+    btn.setAttribute('aria-expanded', 'true');
+    drawer.removeAttribute('hidden');
+  };
+  const close = () => {
+    html.classList.remove('nav-open');
+    btn.setAttribute('aria-expanded', 'false');
+    drawer.setAttribute('hidden', '');
+  };
+
+  btn.addEventListener('click', () => {
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+    isOpen ? close() : open();
+  });
+
+  // Cerrar al navegar dentro del drawer
+  drawer.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', close));
+
+  // Cerrar con ESC
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+  // Si pasa a desktop, cerramos el menú
+  const mq = window.matchMedia('(min-width: 951px)');
+  mq.addEventListener?.('change', e => { if (e.matches) close(); });
+
+})();
 </script>
-<script>
-document.getElementById('y').textContent = new Date().getFullYear();
 
 
-// Scroll suave para los links del navbar
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-anchor.addEventListener('click', function (e) {
-e.preventDefault();
-const target = document.querySelector(this.getAttribute('href'));
-if (target) target.scrollIntoView({ behavior: 'smooth' });
-});
-});
-// Menú mobile: toggle drawer y scroll suave
-(function(){
-const btn = document.querySelector('.menu-toggle');
-const drawer = document.getElementById('nav-drawer');
-if(!btn || !drawer) return;
-const close = () => { document.documentElement.classList.remove('nav-open'); btn.setAttribute('aria-expanded','false'); drawer.setAttribute('hidden',''); };
-const open = () => { document.documentElement.classList.add('nav-open'); btn.setAttribute('aria-expanded','true'); drawer.removeAttribute('hidden'); };
-btn.addEventListener('click', () => {
-const expanded = btn.getAttribute('aria-expanded') === 'true';
-expanded ? close() : open();
-});
-// Cerrar al navegar
-drawer.querySelectorAll('a[href^="#"]').forEach(a=>{
-a.addEventListener('click', ()=> close());
-});
-// Cerrar al presionar ESC
-window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
-})();
-
-
-</script>
-
-<!--Script para loop infinito-->
-<script>
-document.getElementById('y').textContent = new Date().getFullYear();
-
-
-// Scroll suave para los links del navbar
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-anchor.addEventListener('click', function (e) {
-e.preventDefault();
-const target = document.querySelector(this.getAttribute('href'));
-if (target) target.scrollIntoView({ behavior: 'smooth' });
-});
-});
-// Menú mobile: toggle drawer y scroll suave
-(function(){
-const btn = document.querySelector('.menu-toggle');
-const drawer = document.getElementById('nav-drawer');
-if(!btn || !drawer) return;
-const close = () => { document.documentElement.classList.remove('nav-open'); btn.setAttribute('aria-expanded','false'); drawer.setAttribute('hidden',''); };
-const open = () => { document.documentElement.classList.add('nav-open'); btn.setAttribute('aria-expanded','true'); drawer.removeAttribute('hidden'); };
-btn.addEventListener('click', () => {
-const expanded = btn.getAttribute('aria-expanded') === 'true';
-expanded ? close() : open();
-});
-// Cerrar al navegar
-drawer.querySelectorAll('a[href^="#"]').forEach(a=>{
-a.addEventListener('click', ()=> close());
-});
-// Cerrar al presionar ESC
-window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
-})();
-
-
-// Menú mobile: toggle drawer y scroll suave
-(function(){
-const btn = document.querySelector('.menu-toggle');
-const drawer = document.getElementById('nav-drawer');
-if(!btn || !drawer) return;
-const close = () => { document.documentElement.classList.remove('nav-open'); btn.setAttribute('aria-expanded','false'); drawer.setAttribute('hidden',''); };
-const open = () => { document.documentElement.classList.add('nav-open'); btn.setAttribute('aria-expanded','true'); drawer.removeAttribute('hidden'); };
-btn.addEventListener('click', () => {
-const expanded = btn.getAttribute('aria-expanded') === 'true';
-expanded ? close() : open();
-});
-// Cerrar al navegar
-drawer.querySelectorAll('a[href^="#"]').forEach(a=> a.addEventListener('click', ()=> close()));
-// Cerrar al presionar ESC
-window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
-})();
-
-
-// Ajusta dinámicamente la altura del header para posicionar el drawer y evitar que tape el botón
-(function(){
-const header = document.querySelector('header');
-const setH = () => { if(!header) return; const h = header.offsetHeight; document.documentElement.style.setProperty('--header-h', h + 'px'); };
-window.addEventListener('load', setH);
-window.addEventListener('resize', setH);
-setH();
-})();
-
-</script>
 
 <!--Scrip arrastre manual (drag & swipe) seguros-->
 <script>
@@ -526,7 +482,6 @@ setH();
   window.addEventListener('beforeunload', ()=> cancelAnimationFrame(rafId));
 })();
 </script>
-
 
 
 <!--Script flotante wp-->
